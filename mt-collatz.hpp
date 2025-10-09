@@ -1,7 +1,7 @@
 #ifndef MT_COLLATZ_HPP
 #define MT_COLLATZ_HPP
 
-int collatz_f(int n);
+long long collatz_f(long long n);
 void collatz_a(int n);
 
 #endif

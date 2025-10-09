@@ -1,21 +1,18 @@
-#include <iostream>
-#include <thread>
 #include "mt-collatz.hpp"
 
-// ./mt-collatz Numbers Threads
-// ./mt-collatz 1000000 4
+extern void addToVector(int value, int index);
 
-// Collatz sequence
-int collatz_f(int n) {
-    if (n % 2 == 0) {
-        return n / 2;
-    } 
-    else {
-        return 3 * n + 1;
-    }
+long long collatz_f(long long n) {
+    return (n % 2 == 0) ? n / 2 : 3LL * n + 1LL;
 }
+
 void collatz_a(int n) {
-    std::cout << n << " ";
-    if (n == 1) return;
-    collatz_a(collatz_f(n));
+    int steps = 0;
+    long long value = n;
+    while (value != 1) {
+        value = collatz_f(value);
+        steps++;
+    }
+
+    addToVector(steps, n);
 }
