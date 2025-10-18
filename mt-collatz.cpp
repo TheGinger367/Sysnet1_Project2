@@ -1,6 +1,7 @@
 #include "mt-collatz.hpp"
 
-extern void addToVector(int value, int index);
+extern void addToVector(int value, int index, bool nolock);
+extern bool nolock;
 
 long long collatz_f(long long n) {
     return (n % 2 == 0) ? n / 2 : 3LL * n + 1LL;
@@ -14,5 +15,5 @@ void collatz_a(int n) {
         steps++;
     }
 
-    addToVector(steps, n);
+    addToVector(steps, n, nolock);
 }
