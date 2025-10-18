@@ -5,6 +5,7 @@
 #include <mutex>
 #include <chrono>
 #include <atomic>
+#include <time.h>
   
 #include "mt-collatz.hpp"
 
@@ -13,6 +14,7 @@ using namespace std;
 vector<int> globalArray;
 std::atomic<int> counter(1);
 mutex mtx;
+bool nolock = false;
 
 void worker(int maxNumber) {
     while (true) {
@@ -23,17 +25,26 @@ void worker(int maxNumber) {
     }
 }
 
-void addToVector(int value, int index) {
+void addToVector(int value, int index, bool nolock) {
+    if (nolock == false){
     lock_guard<mutex> lock(mtx);
+    }
     if (index >= 0 && index < (int)globalArray.size()) {
         globalArray[value] = globalArray[value] + 1;
     }
 }
 
 int main(int argc, char *argv[]) {
-
     int maxNumber = stoi(argv[1]);
     int numberThreads = stoi(argv[2]);
+    for (int i = 3; i < argc; ++i) {
+        if (std::string(argv[i]) == "-nolock" || std::string(argv[i]) == "[-nolock]") {
+            nolock = true;
+            ::nolock = true;
+            break;
+        }
+    }
+    
 
     globalArray.resize(maxNumber + 1, 0);
     
