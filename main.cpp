@@ -77,14 +77,14 @@ int main(int argc, char *argv[]) {
         count++;
     }
 
-    double avgSteps = static_cast<double>(totalSteps) / count;
+    
     for(int i = 0; i < maxNumber; i++){
         cout << i << "," << globalArray[i] << endl;
     }
-    cout << "Processed " << count << " numbers up to " << maxNumber << endl;
+/*     cout << "Processed " << count << " numbers up to " << maxNumber << endl;
     cout << "Max stopping time: " << maxSteps << endl;
     cout << "Average stopping time: " << avgSteps << endl;
-    cout << "Total time: " << duration << " ms" << endl;
+    cout << "Total time: " << duration << " s" << endl; */
     cerr << maxNumber << "," << numberThreads << "," << duration << endl;
     return 0;
 }
